@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 914aa6b290867b94ea090ec6d16aabec, type: 3}
+  m_Name: EnemyLevel2
+  m_EditorClassIdentifier: 
+  axisForces: {x: 3, y: 8}
+  bounceSound: {fileID: 0}
+  popSound: {fileID: 0}
+  enemyPrefab: {fileID: 8575891887473296839, guid: fbb9d8e90ee80d44797688a275a6119a, type: 3}
+  childEnemyPrefab: {fileID: 11400000, guid: 7bda38a28b20f1248b00ba9c7e7d5d5e, type: 2}
