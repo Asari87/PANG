@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 58f4e8c181277b04f817398ae1b6cf46, type: 3}
+  m_Name: LaserLevel1
+  m_EditorClassIdentifier: 
+  weapon: 0
+  bulletPrefab: {fileID: 8926260067329645546, guid: f08c834b01bb06b44be03ee13b6cd4cf, type: 3}
+  fireForce: 5
+  fireRate: 1
+  fireEffect: {fileID: 3190412071607011468, guid: 8c4ecdd93d1e63e41863c82310d987c0, type: 3}
+  fireSounds:
+  - {fileID: 8300000, guid: 793d6b1263d868a459e28d691d4a54c1, type: 3}

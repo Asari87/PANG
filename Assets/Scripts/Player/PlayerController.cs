@@ -8,8 +8,10 @@ namespace PANG.Input
     {
         [SerializeField] private float maxSpeed = 5;
         [SerializeField] private int smooth = 20;
-        private float moveSpeed = 0;
+        public float moveSpeed = 0;
         private float moveDirection;
+        [SerializeField] PlayerWeaponController weaponController;
+
         public void Move(float direction)
         {
             moveDirection = direction;
@@ -17,7 +19,7 @@ namespace PANG.Input
 
         public void Shoot()
         {
-            Debug.Log("Pew Pew");
+            weaponController.Shoot();
         }
 
 

@@ -10,10 +10,12 @@ namespace PANG.Input
     {
         private GameControls gameControls;
         private PlayerController controller;
+        private PlayerVisualController visualController;
 
         private void Awake()
         {
             controller = GetComponent<PlayerController>();
+            visualController = GetComponentInChildren<PlayerVisualController>();
             gameControls = new();
 
             gameControls.Player1.Movement.performed += HandleControls;
@@ -30,7 +32,10 @@ namespace PANG.Input
         private void HandlerShoot(InputAction.CallbackContext context)
         {
             if(context.performed)
+            {
                 controller.Shoot();
+                visualController.TriggerShoot();
+            }
         }
 
         private void OnEnable()
