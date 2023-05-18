@@ -2,11 +2,8 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 
-using UnityEditor.Experimental.GraphView;
-
 using UnityEngine;
 
-using static UnityEngine.EventSystems.EventTrigger;
 
 public enum EnemyType { Level1, Level2, Level3 }
 public enum Direction { Left = -1, Right = 1 }
@@ -52,6 +49,10 @@ public class EnemyDatabaseSO : ScriptableObject
 
         enemyStatsDictionary.Add(e.type, newStats);
     }
+    public EnemySO GetEnemyStats(EnemyType type)
+    {
+        return enemyStatsDictionary[type];
+    }
 
     public bool HasNextSpawn(EnemyType type)
     {
@@ -68,8 +69,9 @@ public class EnemyDatabaseSO : ScriptableObject
         EnemySO stats = enemyStatsDictionary[type];
         float radius = stats.enemyPrefab.transform.localScale.x; ;
         EnemyController newEnemy = Instantiate(stats.enemyPrefab, position + ((int)dir * Vector3.right * radius/2), Quaternion.identity);
-        newEnemy.SetStats(stats);
+        newEnemy.SetStats(stats.type, stats.axisForces);
         newEnemy.SetDirection(dir);
+
         return newEnemy;
     }
 }

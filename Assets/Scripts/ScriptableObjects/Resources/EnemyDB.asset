@@ -15,23 +15,23 @@ MonoBehaviour:
   enemyList:
   - type: 0
     axisForces: {x: 3, y: 6}
-    bounceSound: {fileID: 0}
-    bounceEffect: {fileID: 0}
-    popSound: {fileID: 0}
+    bounceSound: {fileID: 8300000, guid: f9e166bf6d924674f89dad3b6701bc1c, type: 3}
+    bounceEffect: {fileID: 7296510563589752762, guid: 35a9c94ba53b5044f9bc3ede64c32ebe, type: 3}
+    popSound: {fileID: 8300000, guid: cd139fc20f4a7d548b7e4314010be2e0, type: 3}
     popEffect: {fileID: 0}
     enemyPrefab: {fileID: 1324591113810426423, guid: 3b11b0ab00115ae4aa9ea5f9720e2d00, type: 3}
   - type: 1
     axisForces: {x: 3, y: 8}
-    bounceSound: {fileID: 0}
-    bounceEffect: {fileID: 0}
-    popSound: {fileID: 0}
+    bounceSound: {fileID: 8300000, guid: f9e166bf6d924674f89dad3b6701bc1c, type: 3}
+    bounceEffect: {fileID: 1332253645474387447, guid: 4f23e45f9b30e8a458c2055feacfc9c1, type: 3}
+    popSound: {fileID: 8300000, guid: cd139fc20f4a7d548b7e4314010be2e0, type: 3}
     popEffect: {fileID: 0}
     enemyPrefab: {fileID: 8575891887473296840, guid: fbb9d8e90ee80d44797688a275a6119a, type: 3}
   - type: 2
     axisForces: {x: 3, y: 10}
-    bounceSound: {fileID: 0}
-    bounceEffect: {fileID: 0}
-    popSound: {fileID: 0}
+    bounceSound: {fileID: 8300000, guid: f9e166bf6d924674f89dad3b6701bc1c, type: 3}
+    bounceEffect: {fileID: 7002061188779671836, guid: 432e055fbdcf19c4e943e950d678b7f1, type: 3}
+    popSound: {fileID: 8300000, guid: ec1817cde222c3943b94a4ce07b6c88a, type: 3}
     popEffect: {fileID: 0}
     enemyPrefab: {fileID: 109875456891797240, guid: 96878fd3d19932a47b35d53632262e46, type: 3}
   spawnList:

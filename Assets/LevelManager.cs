@@ -2,18 +2,38 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 using static UnityEngine.EventSystems.EventTrigger;
 
 public class LevelManager : MonoBehaviour
 {
-    [SerializeField] private EnemyDatabaseSO database;
-    [SerializeField] private Spawner spawner;
+    private EnemyDatabaseSO database;
+    private Spawner spawner;
     private void Awake()
     {
+        database = Resources.Load<EnemyDatabaseSO>("EnemyDB");
         database.Initialize();
+        
+        SceneManager.sceneLoaded += HandleLoadedScene;
         EnemyController.OnDeath += HandleEnemyDeath;
+        EnemyCounter.OnAllEnemiesDestroyed += HandleAllEnemiesDestroyed;
     }
+
+    private void HandleAllEnemiesDestroyed()
+    {
+        Debug.Log("All dead");
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    }
+
+    private void HandleLoadedScene(Scene arg0, LoadSceneMode arg1)
+    {
+        if(arg0.name.Equals("DemoScene"))
+        {
+            spawner = FindObjectOfType<Spawner>();
+        }
+    }
+
     private void Start()
     {
         foreach(SpawnDetails sd in spawner.spawnDetails)
@@ -24,19 +44,13 @@ public class LevelManager : MonoBehaviour
     private void OnDestroy()
     {
         EnemyController.OnDeath -= HandleEnemyDeath;
-    }
-
-    private void HandleEnemyDeath(EnemyController enemy)
-    {
-        if(database.HasNextSpawn(enemy.enemyStats.type))
-        {
-            EnemyType nextType = database.GetNextEnemySpawnType(enemy.enemyStats.type);
-            database.GetEnemyByType(nextType, enemy.transform.position, Direction.Left);
-            database.GetEnemyByType(nextType, enemy.transform.position, Direction.Right);
-        }
+        EnemyCounter.OnAllEnemiesDestroyed -= HandleAllEnemiesDestroyed;
+        SceneManager.sceneLoaded -= HandleLoadedScene;
         
-        Destroy(enemy.gameObject);
     }
 
-
+    private void HandleEnemyDeath(EnemyController obj)
+    {
+        
+    }
 }

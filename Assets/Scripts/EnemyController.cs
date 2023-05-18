@@ -1,37 +1,38 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 
-using static UnityEditor.Experimental.GraphView.GraphView;
+using UnityEngine;
 
 public class EnemyController : MonoBehaviour
 {
-    public EnemySO enemyStats;
-
+    public EnemyType type;
+    private Vector2 axisForces;
     private Rigidbody2D rb;
-    [SerializeField] private bool isPaused = false;
+    public bool IsPaused { get; set; } = false;
     private Vector3 currentPos;
 
     public static Action<EnemyController> OnDeath;
+    public static Action<EnemyController> OnBounce;
+    public static Action<EnemyController> OnSpawn;
+
     private void Awake()
     {
+        OnSpawn?.Invoke(this);
         rb = GetComponent<Rigidbody2D>();
     }
 
-    public void SetStats(EnemySO enemyStats)
+    public void SetStats(EnemyType type, Vector2 axisForces)
     {
-        this.enemyStats = enemyStats;
+        this.type = type;
+        this.axisForces = axisForces;
     }
     public void SetDirection(Direction dir)
     {
-            rb.velocity = new Vector2((int)dir * enemyStats.axisForces.x, 0);
+            rb.velocity = new Vector2((int)dir * axisForces.x, 0);
     }
 
     private void Update()
     {
-        
-        if (isPaused)
+        if (IsPaused)
             transform.position = currentPos;
     }
     private void LateUpdate()
@@ -46,17 +47,17 @@ public class EnemyController : MonoBehaviour
         {
             case "Ground":
                 //Bounce
-                rb.velocity = new Vector2(rb.velocity.x, enemyStats.axisForces.y); 
+                rb.velocity = new Vector2(rb.velocity.x, axisForces.y);
+                OnBounce?.Invoke(this);
                 break;
             case "Wall":
                 //Change direction
                 rb.velocity = new Vector2(-rb.velocity.x, rb.velocity.y);
+                OnBounce?.Invoke(this);
                 break;
             case "Bullet":
                 //Die
-                Debug.Log("Pop");
                 OnDeath?.Invoke(this);
-               
                 break;
         }
         
