@@ -24,17 +24,15 @@ public class Spawner : MonoBehaviour
         EnemyController.OnDeath -= HandleEnemyDeath;
     }
 
-    private void HandleEnemyDeath(EnemyController enemy)
+    private void HandleEnemyDeath(EnemyType type, Vector3 position)
     {
         //Handle child spawns first
-        if (database.HasNextSpawn(enemy.type))
+        if (database.HasNextSpawn(type))
         {
-            EnemyType nextType = database.GetNextEnemySpawnType(enemy.type);
-            database.GetEnemyByType(nextType, enemy.transform.position, Direction.Left);
-            database.GetEnemyByType(nextType, enemy.transform.position, Direction.Right);
+            EnemyType nextType = database.GetNextEnemySpawnType(type);
+            database.GetEnemyByType(nextType, position, Direction.Left);
+            database.GetEnemyByType(nextType, position, Direction.Right);
         }
-        
-        Destroy(enemy.gameObject);
     }
 }
 

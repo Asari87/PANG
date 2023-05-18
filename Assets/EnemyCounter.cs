@@ -19,13 +19,13 @@ public class EnemyCounter : MonoBehaviour
         EnemyController.OnSpawn -= IncreaseCounter;
     }
 
-    private void IncreaseCounter(EnemyController obj)
+    private void IncreaseCounter(EnemyType type, Vector3 position)
     {
         enemyCounter++;
         Debug.Log($"Enemy counter: {enemyCounter}");
     }
 
-    private void DecreaseCounter(EnemyController obj)
+    private void DecreaseCounter(EnemyType type, Vector3 position)
     {
         enemyCounter--;
         Debug.Log($"Enemy counter: {enemyCounter}");

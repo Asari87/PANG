@@ -10,13 +10,12 @@ public class EnemyController : MonoBehaviour
     public bool IsPaused { get; set; } = false;
     private Vector3 currentPos;
 
-    public static Action<EnemyController> OnDeath;
-    public static Action<EnemyController> OnBounce;
-    public static Action<EnemyController> OnSpawn;
+    public static Action<EnemyType, Vector3> OnDeath;
+    public static Action<EnemyType, Vector3> OnBounce;
+    public static Action<EnemyType, Vector3> OnSpawn;
 
     private void Awake()
     {
-        OnSpawn?.Invoke(this);
         rb = GetComponent<Rigidbody2D>();
     }
 
@@ -24,6 +23,7 @@ public class EnemyController : MonoBehaviour
     {
         this.type = type;
         this.axisForces = axisForces;
+        OnSpawn?.Invoke(type, transform.position);
     }
     public void SetDirection(Direction dir)
     {
@@ -48,16 +48,17 @@ public class EnemyController : MonoBehaviour
             case "Ground":
                 //Bounce
                 rb.velocity = new Vector2(rb.velocity.x, axisForces.y);
-                OnBounce?.Invoke(this);
+                OnBounce?.Invoke(type,transform.position);
                 break;
             case "Wall":
                 //Change direction
                 rb.velocity = new Vector2(-rb.velocity.x, rb.velocity.y);
-                OnBounce?.Invoke(this);
+                OnBounce?.Invoke(type, transform.position);
                 break;
             case "Bullet":
                 //Die
-                OnDeath?.Invoke(this);
+                OnDeath?.Invoke(type, transform.position);
+                Destroy(gameObject);
                 break;
         }
         

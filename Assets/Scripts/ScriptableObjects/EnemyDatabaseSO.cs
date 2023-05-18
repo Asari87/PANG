@@ -83,11 +83,11 @@ public class Enemy
     public EnemyType type;
     public Vector2 axisForces;
     
-    public AudioClip bounceSound;
-    public ParticleSystem bounceEffect;
+    public AudioClip[] bounceSound;
+    public ParticleSystem[] bounceEffect;
 
-    public AudioClip popSound;
-    public ParticleSystem popEffect;
+    public AudioClip[] popSound;
+    public ParticleSystem[] popEffect;
 
     public EnemyController enemyPrefab;
 

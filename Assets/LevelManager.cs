@@ -16,7 +16,6 @@ public class LevelManager : MonoBehaviour
         database.Initialize();
         
         SceneManager.sceneLoaded += HandleLoadedScene;
-        EnemyController.OnDeath += HandleEnemyDeath;
         EnemyCounter.OnAllEnemiesDestroyed += HandleAllEnemiesDestroyed;
     }
 
@@ -43,14 +42,10 @@ public class LevelManager : MonoBehaviour
     }
     private void OnDestroy()
     {
-        EnemyController.OnDeath -= HandleEnemyDeath;
         EnemyCounter.OnAllEnemiesDestroyed -= HandleAllEnemiesDestroyed;
         SceneManager.sceneLoaded -= HandleLoadedScene;
         
     }
 
-    private void HandleEnemyDeath(EnemyController obj)
-    {
-        
-    }
+
 }

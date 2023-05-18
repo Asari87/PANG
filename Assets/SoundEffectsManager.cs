@@ -3,6 +3,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+using Random = UnityEngine.Random;
+
 public class SoundEffectsManager : MonoBehaviour
 {
     private EnemyDatabaseSO database;
@@ -19,31 +21,37 @@ public class SoundEffectsManager : MonoBehaviour
         EnemyController.OnBounce += HandleEnemyBounce;
     }
 
-    private void HandleEnemyDeath(EnemyController enemy)
+    private void HandleEnemyDeath(EnemyType type, Vector3 position)
     {
-        EnemySO stats = database.GetEnemyStats(enemy.type);
+        EnemySO stats = database.GetEnemyStats(type);
 
-        if (stats.popSound != null)
+        if (stats.popSound != null && stats.popSound.Length > 0)
         {
-            AudioSource.PlayClipAtPoint(stats.popSound, enemy.transform.position);
+            AudioClip randomAudio = stats.popSound[Random.Range(0, stats.popSound.Length)];
+            AudioSource.PlayClipAtPoint(randomAudio, position);
         }
-        if (stats.popEffect != null)
+        if (stats.popEffect != null && stats.popEffect.Length > 0)
         {
-            Instantiate(stats.popEffect, enemy.transform.position, Quaternion.identity);
+            ParticleSystem randomEffect = stats.popEffect[Random.Range(0,stats.popEffect.Length)];
+            Instantiate(randomEffect, position, Quaternion.identity);
         }
     }
 
-    private void HandleEnemyBounce(EnemyController enemy)
+    private void HandleEnemyBounce(EnemyType type, Vector3 position)
     {
-        EnemySO stats = database.GetEnemyStats(enemy.type);
+        EnemySO stats = database.GetEnemyStats(type);
         //dispose of enemy
-        if (stats.bounceSound != null)
+        if (stats.bounceSound != null && stats.bounceSound.Length > 0 )
         {
-            AudioSource.PlayClipAtPoint(stats.bounceSound, enemy.transform.position);
+            AudioClip randomAudio = stats.bounceSound[Random.Range(0, stats.bounceSound.Length)];
+            AudioSource.PlayClipAtPoint(randomAudio, position);
         }
-        if (stats.bounceEffect != null)
+        if (stats.bounceEffect != null && stats.bounceEffect.Length > 0)
         {
-            Instantiate(stats.bounceEffect, enemy.transform.position +(Vector3.down*enemy.transform.localScale.x/2), Quaternion.identity);
+            ParticleSystem randomEffect = stats.bounceEffect[Random.Range(0, stats.popEffect.Length)];
+            RaycastHit2D hit = Physics2D.Raycast(position, Vector2.down, Mathf.Infinity, LayerMask.NameToLayer("Ground"));
+            if(hit.transform != null)
+                Instantiate(randomEffect, hit.point, Quaternion.identity);
         }
     }
 
