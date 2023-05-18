@@ -1,0 +1,41 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 54c42524b717f134eb5e06ddf1961e58, type: 3}
+  m_Name: EnemyDB
+  m_EditorClassIdentifier: 
+  enemyList:
+  - type: 0
+    axisForces: {x: 3, y: 6}
+    bounceSound: {fileID: 0}
+    bounceEffect: {fileID: 0}
+    popSound: {fileID: 0}
+    popEffect: {fileID: 0}
+    enemyPrefab: {fileID: 1324591113810426423, guid: 3b11b0ab00115ae4aa9ea5f9720e2d00, type: 3}
+  - type: 1
+    axisForces: {x: 3, y: 8}
+    bounceSound: {fileID: 0}
+    bounceEffect: {fileID: 0}
+    popSound: {fileID: 0}
+    popEffect: {fileID: 0}
+    enemyPrefab: {fileID: 8575891887473296840, guid: fbb9d8e90ee80d44797688a275a6119a, type: 3}
+  - type: 2
+    axisForces: {x: 3, y: 10}
+    bounceSound: {fileID: 0}
+    bounceEffect: {fileID: 0}
+    popSound: {fileID: 0}
+    popEffect: {fileID: 0}
+    enemyPrefab: {fileID: 109875456891797240, guid: 96878fd3d19932a47b35d53632262e46, type: 3}
+  spawnList:
+  - parent: 2
+    child: 1
+  - parent: 1
+    child: 0

@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,14 +7,36 @@ using static UnityEditor.Experimental.GraphView.GraphView;
 
 public class EnemyController : MonoBehaviour
 {
-    [SerializeField] private EnemySO enemyStats;
+    public EnemySO enemyStats;
 
     private Rigidbody2D rb;
+    [SerializeField] private bool isPaused = false;
+    private Vector3 currentPos;
 
+    public static Action<EnemyController> OnDeath;
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
-        rb.velocity = new Vector2(enemyStats.axisForces.x,0);
+    }
+
+    public void SetStats(EnemySO enemyStats)
+    {
+        this.enemyStats = enemyStats;
+    }
+    public void SetDirection(Direction dir)
+    {
+            rb.velocity = new Vector2((int)dir * enemyStats.axisForces.x, 0);
+    }
+
+    private void Update()
+    {
+        
+        if (isPaused)
+            transform.position = currentPos;
+    }
+    private void LateUpdate()
+    {
+        currentPos = transform.position;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -32,11 +55,8 @@ public class EnemyController : MonoBehaviour
             case "Bullet":
                 //Die
                 Debug.Log("Pop");
-                if (enemyStats.childEnemyPrefab != null)
-                {
-                    Instantiate(enemyStats.childEnemyPrefab.enemyPrefab,transform.position, Quaternion.identity);   
-                }
-                Destroy(gameObject);
+                OnDeath?.Invoke(this);
+               
                 break;
         }
         

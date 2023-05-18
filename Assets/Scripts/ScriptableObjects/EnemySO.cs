@@ -6,12 +6,14 @@ using UnityEngine;
 [CreateAssetMenu()]
 public class EnemySO : ScriptableObject
 {
+    public EnemyType type;
+
     public Vector2 axisForces;
     public AudioClip bounceSound;
+    public ParticleSystem bounceEffect;
+
     public AudioClip popSound;
+    public ParticleSystem popEffect;
 
-    public GameObject enemyPrefab;
-    public EnemySO childEnemyPrefab;
-
-
+    public EnemyController enemyPrefab;
 }
