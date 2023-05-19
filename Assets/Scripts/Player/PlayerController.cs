@@ -11,7 +11,14 @@ namespace PANG.Input
         public float moveSpeed = 0;
         private float moveDirection;
         [SerializeField] PlayerWeaponController weaponController;
+        public Action<bool> OnDeathStateChanged;
+        private bool isDead = false;
 
+        private void Start()
+        {
+            OnDeathStateChanged?.Invoke(false);
+            isDead = false;
+        }
         public void Move(float direction)
         {
             moveDirection = direction;
@@ -25,6 +32,7 @@ namespace PANG.Input
 
         private void Update()
         {
+            if (isDead) return;
             moveSpeed = Mathf.MoveTowards(moveSpeed, maxSpeed * moveDirection, smooth * Time.deltaTime);
             Vector3 step = new Vector3(moveSpeed, 0, 0) * Time.deltaTime;
             RaycastHit2D hit = Physics2D.Raycast(transform.position+Vector3.up,step.normalized,1);
@@ -35,6 +43,21 @@ namespace PANG.Input
             transform.position += step;
 
         }
+        private void OnTriggerEnter2D(Collider2D collision)
+        {
+            if(isDead) return;
+            if(collision.gameObject.layer == LayerMask.NameToLayer("Enemy"))
+            {
+                StartCoroutine(Die());
+            }
+        }
 
+        private IEnumerator Die()
+        {
+            isDead = true;
+            OnDeathStateChanged?.Invoke(true);
+            yield return new WaitForSeconds(2);
+            SceneHandler.Instance.RestartLevel();
+        }
     }
 }

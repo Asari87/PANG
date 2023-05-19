@@ -68,4 +68,9 @@ public class SceneHandler : MonoBehaviour
 
         yield return fader.FadeIn(fadeInTime);
     }
+
+    internal void RestartLevel()
+    {
+        LoadLevel(SceneManager.GetActiveScene().buildIndex);
+    }
 }

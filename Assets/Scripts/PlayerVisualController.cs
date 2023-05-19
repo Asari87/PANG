@@ -1,5 +1,6 @@
 using PANG.Input;
 
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -15,6 +16,18 @@ public class PlayerVisualController : MonoBehaviour
         SpriteRenderer = GetComponent<SpriteRenderer>();
         animator = GetComponent<Animator>();
         controller = GetComponentInParent<PlayerController>();
+        controller.OnDeathStateChanged += HandleDeathAnimation;
+    }
+    private void OnDestroy()
+    {
+        controller.OnDeathStateChanged -= HandleDeathAnimation;
+    }
+
+    private void HandleDeathAnimation(bool state)
+    {
+        animator.SetBool("IsDead", state);
+        if (state)
+            animator.SetTrigger("Die");
     }
 
     public void TriggerShoot()

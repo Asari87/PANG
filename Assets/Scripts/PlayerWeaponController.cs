@@ -30,7 +30,7 @@ public class PlayerWeaponController : MonoBehaviour
         if(weaponStats.fireSounds.Length> 0 )
         {
             AudioClip randomClip = weaponStats.fireSounds[UnityEngine.Random.Range(0, weaponStats.fireSounds.Length)];
-            AudioSource.PlayClipAtPoint(randomClip, Camera.main.transform.position);
+            SoundManager.Instance.PlayClipAtPoint(randomClip, Camera.main.transform.position);
         }
         if(weaponStats.fireEffect != null)
         {
