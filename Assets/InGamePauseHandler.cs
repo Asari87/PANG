@@ -14,4 +14,10 @@ public class InGamePauseHandler : MonoBehaviour
     {
         Time.timeScale = 1;
     }
+
+    public void QuitGame()
+    {
+        Time.timeScale = 1;
+        SceneHandler.Instance.LoadScene(0);
+    }
 }
