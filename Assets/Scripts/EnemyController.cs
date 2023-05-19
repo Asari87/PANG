@@ -10,7 +10,7 @@ public class EnemyController : MonoBehaviour
     public bool IsPaused { get; set; } = false;
     private Vector3 currentPos;
 
-    public static Action<EnemyType, Vector3> OnDeath;
+    public static Action<EnemyType, Vector3> OnPop;
     public static Action<EnemyType, Vector3> OnBounce;
     public static Action<EnemyType, Vector3> OnSpawn;
 
@@ -57,7 +57,7 @@ public class EnemyController : MonoBehaviour
                 break;
             case "Bullet":
                 //Die
-                OnDeath?.Invoke(type, transform.position);
+                OnPop?.Invoke(type, transform.position);
                 Destroy(gameObject);
                 break;
         }

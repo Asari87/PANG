@@ -14,14 +14,28 @@ public class LevelManager : MonoBehaviour
     {
         database = Resources.Load<EnemyDatabaseSO>("EnemyDB");
         database.Initialize();
-        spawner = GetComponentInChildren<Spawner>();
         EnemyCounter.OnAllEnemiesDestroyed += HandleAllEnemiesDestroyed;
+
+        SceneManager.sceneLoaded += HandleNewScene;
+    }
+
+    private void HandleNewScene(Scene scene, LoadSceneMode mode)
+    {
+        if(scene.name.Contains("Level"))
+            spawner = FindFirstObjectByType<Spawner>();
     }
 
     private void HandleAllEnemiesDestroyed()
     {
         Debug.Log("All dead");
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        StartCoroutine(EndLevelRoutine());
+    }
+
+    private IEnumerator EndLevelRoutine()
+    {
+        yield return new WaitForSeconds(3);
+        SceneHandler.Instance.LoadLevel(SceneManager.GetActiveScene().buildIndex + 1);
+
     }
 
     private void Start()
@@ -34,7 +48,8 @@ public class LevelManager : MonoBehaviour
     private void OnDestroy()
     {
         EnemyCounter.OnAllEnemiesDestroyed -= HandleAllEnemiesDestroyed;
-        
+        SceneManager.sceneLoaded -= HandleNewScene;
+
     }
 
 

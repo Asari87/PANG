@@ -5,19 +5,19 @@ using UnityEngine;
 
 using Random = UnityEngine.Random;
 
-public class SoundEffectsManager : MonoBehaviour
+public class LevelEffectsHandler : MonoBehaviour
 {
     private EnemyDatabaseSO database;
     private void Awake()
     {
         database = Resources.Load<EnemyDatabaseSO>("EnemyDB");
-        EnemyController.OnDeath += HandleEnemyDeath;
+        EnemyController.OnPop += HandleEnemyDeath;
         EnemyController.OnBounce += HandleEnemyBounce;
     }
 
     private void OnDestroy()
     {
-        EnemyController.OnDeath += HandleEnemyDeath;
+        EnemyController.OnPop += HandleEnemyDeath;
         EnemyController.OnBounce += HandleEnemyBounce;
     }
 
@@ -28,7 +28,7 @@ public class SoundEffectsManager : MonoBehaviour
         if (stats.popSound != null && stats.popSound.Length > 0)
         {
             AudioClip randomAudio = stats.popSound[Random.Range(0, stats.popSound.Length)];
-            AudioSource.PlayClipAtPoint(randomAudio, position);
+            SoundManager.Instance.PlayClipAtPoint(randomAudio, position);
         }
         if (stats.popEffect != null && stats.popEffect.Length > 0)
         {
@@ -44,7 +44,7 @@ public class SoundEffectsManager : MonoBehaviour
         if (stats.bounceSound != null && stats.bounceSound.Length > 0 )
         {
             AudioClip randomAudio = stats.bounceSound[Random.Range(0, stats.bounceSound.Length)];
-            AudioSource.PlayClipAtPoint(randomAudio, position);
+            SoundManager.Instance.PlayClipAtPoint(randomAudio, position);
         }
         if (stats.bounceEffect != null && stats.bounceEffect.Length > 0)
         {

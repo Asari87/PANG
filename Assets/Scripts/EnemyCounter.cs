@@ -9,13 +9,13 @@ public class EnemyCounter : MonoBehaviour
     public static Action OnAllEnemiesDestroyed;
     private void Awake()
     {
-        EnemyController.OnDeath += DecreaseCounter;
+        EnemyController.OnPop += DecreaseCounter;
         EnemyController.OnSpawn += IncreaseCounter;
     }
 
     private void OnDestroy()
     {
-        EnemyController.OnDeath -= DecreaseCounter;
+        EnemyController.OnPop -= DecreaseCounter;
         EnemyController.OnSpawn -= IncreaseCounter;
     }
 

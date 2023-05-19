@@ -9,7 +9,7 @@ public class Spawner : MonoBehaviour
     private EnemyDatabaseSO database;
     private void Awake()
     {
-        EnemyController.OnDeath += HandleEnemyDeath;
+        EnemyController.OnPop += HandleEnemyDeath;
         database = Resources.Load<EnemyDatabaseSO>("EnemyDB");
     }
     private void StartLevel()
@@ -21,7 +21,7 @@ public class Spawner : MonoBehaviour
     }
     private void OnDestroy()
     {
-        EnemyController.OnDeath -= HandleEnemyDeath;
+        EnemyController.OnPop -= HandleEnemyDeath;
     }
 
     private void HandleEnemyDeath(EnemyType type, Vector3 position)

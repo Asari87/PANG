@@ -15,15 +15,5 @@ public class SoundsDatabase : ScriptableObject
     public AudioClip buttonHover;
     public AudioClip buttonPress;
 
-    [Header("Enemy")]
-    public EnemySounds[] enemySounds;
-
-
 }
-[Serializable]
-public class EnemySounds
-{
-    public EnemyType type;
-    public AudioClip[] bounce;
-    public AudioClip[] pop;
-}
+

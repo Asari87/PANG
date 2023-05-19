@@ -12,7 +12,7 @@ public class SoundManager : MonoBehaviour
     [SerializeReference] private AudioSource effectsSource;
     [SerializeReference] private AudioSource musicSource;
     private bool inGameScene;
-    private SoundsDatabase soundsDB;
+    public SoundsDatabase soundsDB;
     private void Awake()
     {
         if(Instance== null)
@@ -93,12 +93,12 @@ public class SoundManager : MonoBehaviour
 
     public void PlayEffect(AudioClip clip)
     {
-        effectsSource.PlayOneShot(clip);
+        effectsSource.PlayOneShot(clip,effectsSource.volume);
     }
 
     public void PlayClipAtPoint(AudioClip clip, Vector3 worldPosition, float volume = 1)
     {
-        AudioSource.PlayClipAtPoint(clip, worldPosition, volume);
+        AudioSource.PlayClipAtPoint(clip, worldPosition, effectsSource.volume * volume);
     }
 
 

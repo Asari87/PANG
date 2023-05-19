@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   weapon: 0
   bulletPrefab: {fileID: 8926260067329645546, guid: f08c834b01bb06b44be03ee13b6cd4cf, type: 3}
-  fireForce: 5
-  fireRate: 1
+  fireForce: 7
+  fireRate: 0.25
   fireEffect: {fileID: 3190412071607011468, guid: 8c4ecdd93d1e63e41863c82310d987c0, type: 3}
   fireSounds:
   - {fileID: 8300000, guid: 793d6b1263d868a459e28d691d4a54c1, type: 3}
