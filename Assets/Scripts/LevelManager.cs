@@ -10,8 +10,17 @@ public class LevelManager : MonoBehaviour
 {
     private EnemyDatabaseSO database;
     private Spawner spawner;
+    private static LevelManager Instance;
     private void Awake()
     {
+        if(Instance == null)
+        {
+            Instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        else
+            Destroy(gameObject);
+
         database = Resources.Load<EnemyDatabaseSO>("EnemyDB");
         database.Initialize();
         EnemyCounter.OnAllEnemiesDestroyed += HandleAllEnemiesDestroyed;
@@ -22,7 +31,15 @@ public class LevelManager : MonoBehaviour
     private void HandleNewScene(Scene scene, LoadSceneMode mode)
     {
         if(scene.name.Contains("Level"))
+        {
             spawner = FindFirstObjectByType<Spawner>();
+            foreach (SpawnDetails sd in spawner.spawnDetails)
+            {
+                database.GetEnemyByType(sd.type, sd.startingPoint.position, Direction.Right);
+            }
+        }
+        else
+            Destroy(gameObject);
     }
 
     private void HandleAllEnemiesDestroyed()
@@ -38,13 +55,6 @@ public class LevelManager : MonoBehaviour
 
     }
 
-    private void Start()
-    {
-        foreach(SpawnDetails sd in spawner.spawnDetails)
-        {
-            database.GetEnemyByType(sd.type, sd.startingPoint.position, Direction.Right);
-        }
-    }
     private void OnDestroy()
     {
         EnemyCounter.OnAllEnemiesDestroyed -= HandleAllEnemiesDestroyed;
