@@ -14,6 +14,6 @@ Pop the same balls in different backgrounds!
 ![Screenshot 2023-05-20 220659](https://github.com/Asari87/PANG/assets/105987847/7739a05c-e0de-4f38-b2a4-09394930ced5)
 
 And dodge. dodge a lot...
-![Screenshot 2023-05-20 220659](https://github.com/Asari87/PANG/assets/105987847/8a89913a-08b3-4f77-bbca-650a0014babf)
+![Screenshot 2023-05-20 221117](https://github.com/Asari87/PANG/assets/105987847/1041364e-f2ab-43a6-80f3-c33e1b898392)
 
 Good luck!
