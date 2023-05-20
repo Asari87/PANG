@@ -49,8 +49,8 @@ public class LevelEffectsHandler : MonoBehaviour
         if (stats.bounceEffect != null && stats.bounceEffect.Length > 0)
         {
             ParticleSystem randomEffect = stats.bounceEffect[Random.Range(0, stats.popEffect.Length)];
-            RaycastHit2D hit = Physics2D.Raycast(position, Vector2.down, Mathf.Infinity, LayerMask.NameToLayer("Ground"));
-            if(hit.transform != null)
+            RaycastHit2D hit = Physics2D.Raycast(position, Vector2.down, 1, LayerMask.GetMask(new[]{ "Ground"}));
+            if(hit.transform != null)// && hit.transform.gameObject.layer == LayerMask.NameToLayer("Ground"))
                 Instantiate(randomEffect, hit.point, Quaternion.identity);
         }
     }
