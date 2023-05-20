@@ -600,6 +600,38 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2057198086551559133, guid: 3e33ad84f9b9ff74e9f83b26e7cca0cb, type: 3}
+      propertyPath: m_RaycastPadding.w
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2057198086551559133, guid: 3e33ad84f9b9ff74e9f83b26e7cca0cb, type: 3}
+      propertyPath: m_RaycastPadding.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2057198086551559133, guid: 3e33ad84f9b9ff74e9f83b26e7cca0cb, type: 3}
+      propertyPath: m_RaycastPadding.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2057198086551559133, guid: 3e33ad84f9b9ff74e9f83b26e7cca0cb, type: 3}
+      propertyPath: m_RaycastPadding.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2057198087913611227, guid: 3e33ad84f9b9ff74e9f83b26e7cca0cb, type: 3}
+      propertyPath: m_RaycastPadding.w
+      value: -300
+      objectReference: {fileID: 0}
+    - target: {fileID: 2057198087913611227, guid: 3e33ad84f9b9ff74e9f83b26e7cca0cb, type: 3}
+      propertyPath: m_RaycastPadding.x
+      value: -300
+      objectReference: {fileID: 0}
+    - target: {fileID: 2057198087913611227, guid: 3e33ad84f9b9ff74e9f83b26e7cca0cb, type: 3}
+      propertyPath: m_RaycastPadding.y
+      value: -300
+      objectReference: {fileID: 0}
+    - target: {fileID: 2057198087913611227, guid: 3e33ad84f9b9ff74e9f83b26e7cca0cb, type: 3}
+      propertyPath: m_RaycastPadding.z
+      value: -300
+      objectReference: {fileID: 0}
     - target: {fileID: 3758933027312221152, guid: 3e33ad84f9b9ff74e9f83b26e7cca0cb, type: 3}
       propertyPath: m_RootOrder
       value: 6
