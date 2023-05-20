@@ -176,6 +176,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   effectsSource: {fileID: 8306590967240149597}
   musicSource: {fileID: 8306590965698823284}
+  soundsDB: {fileID: 0}
 --- !u!1 &8306590967240149598
 GameObject:
   m_ObjectHideFlags: 0
