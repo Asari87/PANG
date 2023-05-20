@@ -72,7 +72,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxSpeed: 5
-  smooth: 20
+  smooth: 50
   moveSpeed: 0
   weaponController: {fileID: 9007318921023667481}
 --- !u!114 &9007318920310146976
@@ -122,8 +122,8 @@ CapsuleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.000000059604645, y: 0.7342129}
-  m_Size: {x: 0.59667933, y: 1.1428971}
+  m_Offset: {x: -0.010710299, y: 0.66816545}
+  m_Size: {x: 0.50385606, y: 1.0108023}
   m_Direction: 0
 --- !u!1 &9007318920364084023
 GameObject:

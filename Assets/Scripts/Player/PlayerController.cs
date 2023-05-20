@@ -2,6 +2,9 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+
+using Random = UnityEngine.Random;
+
 namespace PANG.Input
 {
     public class PlayerController : MonoBehaviour
@@ -26,6 +29,7 @@ namespace PANG.Input
 
         public void Shoot()
         {
+            if (isDead) return;
             weaponController.Shoot();
         }
 
@@ -56,6 +60,7 @@ namespace PANG.Input
         {
             isDead = true;
             OnDeathStateChanged?.Invoke(true);
+            SoundManager.Instance.OnPlayerDied();
             yield return new WaitForSeconds(2);
             SceneHandler.Instance.RestartLevel();
         }

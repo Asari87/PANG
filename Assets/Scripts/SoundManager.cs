@@ -1,5 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
+
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -11,7 +13,6 @@ public class SoundManager : MonoBehaviour
 
     [SerializeReference] private AudioSource effectsSource;
     [SerializeReference] private AudioSource musicSource;
-    private bool inGameScene;
     public SoundsDatabase soundsDB;
     private void Awake()
     {
@@ -63,7 +64,26 @@ public class SoundManager : MonoBehaviour
 
     private void HandleLoadedScene(Scene arg0, LoadSceneMode arg1)
     {
-        //Get scene theme
+        switch (arg0.name)
+        {
+            case "IntroScene":
+                musicSource.clip = soundsDB.menuAmbience[Random.Range(0, soundsDB.menuAmbience.Length)];
+                break;
+            case "GameOverScene":
+                musicSource.clip = soundsDB.gameOverAmbience[Random.Range(0, soundsDB.gameOverAmbience.Length)];
+                break;
+            default: 
+                LevelAudio levelClips = soundsDB.levelsAmbiance.FirstOrDefault(la => la.sceneName== arg0.name);
+                if(levelClips != null && levelClips.audio != null)
+                {
+                    musicSource.clip = levelClips.audio;
+                }
+                else
+                    musicSource.clip = soundsDB.menuAmbience[Random.Range(0, soundsDB.menuAmbience.Length)];
+                break;
+        
+        }
+        musicSource.Play();
     }
 
     public void HandleButtonEvent(ButtonEvent buttonEvent)
@@ -79,17 +99,6 @@ public class SoundManager : MonoBehaviour
         }
     }
 
-    private void Update()
-    {
-        if(!musicSource.isPlaying)
-        {
-            if(inGameScene)
-                musicSource.clip = soundsDB.gameAmbience[Random.Range(0, soundsDB.gameAmbience.Length)];
-            else
-                musicSource.clip = soundsDB.menuAmbience[Random.Range(0, soundsDB.menuAmbience.Length)];
-            musicSource.Play();
-        }
-    }
 
     public void PlayEffect(AudioClip clip)
     {
@@ -128,5 +137,12 @@ public class SoundManager : MonoBehaviour
         PlayerPrefs.SetFloat(SoundPrefsKeys.MusicVolume.ToString(), musicSource.volume);
         PlayerPrefs.SetInt(SoundPrefsKeys.EffectMute.ToString(), effectsSource.mute ? 1 : 0);
         PlayerPrefs.SetInt(SoundPrefsKeys.MusicMute.ToString(), musicSource.mute ? 1 : 0);
+    }
+
+    internal void OnPlayerDied()
+    {
+        effectsSource.PlayOneShot(soundsDB.playerDeath, effectsSource.volume);
+        if (musicSource.isPlaying)
+            musicSource.Stop();
     }
 }
