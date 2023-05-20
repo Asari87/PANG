@@ -46,7 +46,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fadeOutTime: 2
-  fadeInTime: 2
+  fadeInTime: 1
 --- !u!1 &6427722147829429757
 GameObject:
   m_ObjectHideFlags: 0

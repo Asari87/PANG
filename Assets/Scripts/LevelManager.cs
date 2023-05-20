@@ -11,6 +11,7 @@ public class LevelManager : MonoBehaviour
     private EnemyDatabaseSO database;
     private Spawner spawner;
     private static LevelManager Instance;
+    [SerializeField] private GameObject levelCompletePanel;
     private void Awake()
     {
         if(Instance == null)
@@ -21,6 +22,7 @@ public class LevelManager : MonoBehaviour
         else
             Destroy(gameObject);
 
+        levelCompletePanel.SetActive(false);
         database = Resources.Load<EnemyDatabaseSO>("EnemyDB");
         database.Initialize();
         EnemyCounter.OnAllEnemiesDestroyed += HandleAllEnemiesDestroyed;
@@ -30,7 +32,8 @@ public class LevelManager : MonoBehaviour
 
     private void HandleNewScene(Scene scene, LoadSceneMode mode)
     {
-        if(scene.name.Contains("Level"))
+        levelCompletePanel.SetActive(false);
+        if (scene.name.Contains("Level"))
         {
             spawner = FindFirstObjectByType<Spawner>();
             foreach (SpawnDetails sd in spawner.spawnDetails)
@@ -50,6 +53,8 @@ public class LevelManager : MonoBehaviour
 
     private IEnumerator EndLevelRoutine()
     {
+        yield return new WaitForSeconds(.5f);
+        levelCompletePanel.SetActive(true);
         yield return new WaitForSeconds(3);
         SceneHandler.Instance.LoadLevel(SceneManager.GetActiveScene().buildIndex + 1);
 
