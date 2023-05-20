@@ -6,11 +6,11 @@ Got no on going quests?
 Then pop into existence and pop giant balls for unknown reasons!
 
 On Windows 
-A & D - move left and right
-W - fire
+Use A & D - move left and right,
+Use W - fire.
 
 On Android
-Use joystick and fire button
+Use joystick and fire button.
 
 
 ![Screenshot 2023-05-20 220505](https://github.com/Asari87/PANG/assets/105987847/d4a13f96-e28c-4ba7-8d85-4ec692877150)
