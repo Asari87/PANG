@@ -6,6 +6,11 @@ using UnityEngine.SceneManagement;
 
 using static UnityEngine.EventSystems.EventTrigger;
 
+
+/// <summary>
+/// Handles each level's progress. On scene change it looks for the local spawner, 
+/// spawns enemies and when for EnemyCounter to notify that all enemies are destroyed.
+/// </summary>
 public class LevelManager : MonoBehaviour
 {
     private EnemyDatabaseSO database;

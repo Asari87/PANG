@@ -5,6 +5,9 @@ using UnityEngine;
 
 using Random = UnityEngine.Random;
 
+/// <summary>
+/// Handle level related sound and effects such as enemy bounce and pop
+/// </summary>
 public class LevelEffectsHandler : MonoBehaviour
 {
     private EnemyDatabaseSO database;

@@ -5,6 +5,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Handle player animations
+/// </summary>
 public class PlayerVisualController : MonoBehaviour
 {
     private SpriteRenderer SpriteRenderer;

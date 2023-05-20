@@ -6,7 +6,14 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public enum SoundType { Effect, Music}
-public enum SoundPrefsKeys { EffectMute, EffectVolume, MusicMute, MusicVolume}  
+public enum SoundPrefsKeys { EffectMute, EffectVolume, MusicMute, MusicVolume}
+
+/// <summary>
+/// Handle all sound requests. Controls effects and music separately.
+/// </summary>
+/// <remarks>
+/// All sound requests must go through the Instance property.
+/// </remarks>
 public class SoundManager : MonoBehaviour
 {
     public static SoundManager Instance;

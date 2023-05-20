@@ -3,6 +3,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
+/// <summary>
+/// Holds all global sounds to be used in SoundManager
+/// </summary>
+/// <remarks>
+/// Individual sounds may be kept elsewhere
+/// </remarks>
 [CreateAssetMenu()]
 public class SoundsDatabase : ScriptableObject
 {

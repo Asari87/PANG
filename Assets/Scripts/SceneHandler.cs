@@ -7,6 +7,12 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public enum Scenes { IntroScene, Level, GameOverScene }
+/// <summary>
+/// Swap scenes on requests.
+/// </summary>
+/// <remarks>
+/// Makes use of Fader to fade in and out of scenes
+/// </remarks>
 public class SceneHandler : MonoBehaviour
 {
     public static SceneHandler Instance;

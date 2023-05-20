@@ -5,6 +5,9 @@ using UnityEngine;
 
 public enum WeaponType { Laser}
 
+/// <summary>
+/// Blueprint for weapon. This is the base for weapon upgrade system.
+/// </summary>
 [CreateAssetMenu(fileName = "New Weapon", menuName = "PANG/Weapon/New Weapon", order = 0)]
 public class WeaponSO : ScriptableObject
 {

@@ -5,6 +5,14 @@ using System.Linq;
 
 using UnityEngine;
 
+
+/// <summary>
+/// Handle the enemy weapon properties.
+/// </summary>
+/// <remarks>
+/// WeaponSO is the base start for weapon upgrade system. 
+/// this can be replace any time to change the way a weapon behaves.
+/// </remarks>
 public class PlayerWeaponController : MonoBehaviour
 {
     [SerializeField] private WeaponSO weaponStats;
