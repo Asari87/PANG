@@ -21,6 +21,8 @@ public class SoundManager : MonoBehaviour
     [SerializeReference] private AudioSource effectsSource;
     [SerializeReference] private AudioSource musicSource;
     public SoundsDatabase soundsDB;
+    private Coroutine fadeRoutine;
+    private float savedMusicVolume;
     private void Awake()
     {
         if(Instance== null)
@@ -53,11 +55,11 @@ public class SoundManager : MonoBehaviour
 
             if (PlayerPrefs.HasKey(SoundPrefsKeys.EffectVolume.ToString()))
             {
-                effectsSource.volume = PlayerPrefs.GetFloat(SoundPrefsKeys.EffectVolume.ToString());
+                SetEffectsVolume(PlayerPrefs.GetFloat(SoundPrefsKeys.EffectVolume.ToString()));
             }
             if (PlayerPrefs.HasKey(SoundPrefsKeys.MusicVolume.ToString()))
             {
-                musicSource.volume = PlayerPrefs.GetFloat(SoundPrefsKeys.MusicVolume.ToString());
+                SetMusicVolume(PlayerPrefs.GetFloat(SoundPrefsKeys.MusicVolume.ToString()));
             }
         }
     }
@@ -136,6 +138,7 @@ public class SoundManager : MonoBehaviour
     public void SetMusicVolume(float value)
     {
         musicSource.volume = value;
+        savedMusicVolume = value;
     }
 
     public void SaveChanges()
@@ -151,5 +154,32 @@ public class SoundManager : MonoBehaviour
         effectsSource.PlayOneShot(soundsDB.playerDeath, effectsSource.volume);
         if (musicSource.isPlaying)
             musicSource.Stop();
+    }
+
+    public Coroutine FadeInMusic(float duration)
+    {
+        return Fade(duration, savedMusicVolume);
+    }
+    public Coroutine FadeOutMusic(float duration)
+    {
+        savedMusicVolume = musicSource.volume;
+        return Fade(duration, 0);
+    }
+
+    private Coroutine Fade(float duration, float volume)
+    {
+        if(fadeRoutine != null)
+            StopCoroutine(fadeRoutine);
+        fadeRoutine = StartCoroutine(FadeMusic(duration, volume));
+        return fadeRoutine;
+    }
+
+    private IEnumerator FadeMusic(float duration, float target)
+    {
+        while(musicSource.volume != target)
+        {
+            musicSource.volume = Mathf.MoveTowards(musicSource.volume, target, (1 / duration) * Time.deltaTime);
+            yield return null;
+        }
     }
 }

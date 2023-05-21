@@ -66,12 +66,14 @@ public class SceneHandler : MonoBehaviour
     private IEnumerator SwtichScene(string nextScene)
     {
         yield return fader.FadeOut(fadeOutTime);
+        yield return SoundManager.Instance.FadeOutMusic(.5f);
         AsyncOperation op = SceneManager.LoadSceneAsync(nextScene);
         while (op.progress < .9f)
         {
             yield return null;
         }
 
+        yield return SoundManager.Instance.FadeInMusic(.5f);
         yield return fader.FadeIn(fadeInTime);
     }
 
