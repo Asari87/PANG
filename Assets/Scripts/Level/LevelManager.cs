@@ -17,6 +17,7 @@ public class LevelManager : MonoBehaviour
     private Spawner spawner;
     private static LevelManager Instance;
     [SerializeField] private GameObject levelCompletePanel;
+    [SerializeField] private CountdownUIHandler countdownUI;
     private void Awake()
     {
         if(Instance == null)
@@ -40,14 +41,19 @@ public class LevelManager : MonoBehaviour
         levelCompletePanel.SetActive(false);
         if (scene.name.Contains("Level"))
         {
-            spawner = FindFirstObjectByType<Spawner>();
-            foreach (SpawnDetails sd in spawner.spawnDetails)
-            {
-                database.GetEnemyByType(sd.type, sd.startingPoint.position, Direction.Right);
-            }
+            countdownUI.Countdown(StartLevel);
         }
         else
             Destroy(gameObject);
+    }
+
+    private void StartLevel()
+    {
+        spawner = FindFirstObjectByType<Spawner>();
+        foreach (SpawnDetails sd in spawner.spawnDetails)
+        {
+            database.GetEnemyByType(sd.type, sd.startingPoint.position, Direction.Right);
+        }
     }
 
     private void HandleAllEnemiesDestroyed()
